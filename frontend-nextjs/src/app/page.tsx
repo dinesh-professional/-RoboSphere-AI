@@ -8,7 +8,7 @@ export default function Home() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   if (isAuthenticated) {
-    return <Dashboard />;
+    return <Dashboard onLogout={() => setIsAuthenticated(false)} />;
   }
 
   return <LoginScreen onLogin={() => setIsAuthenticated(true)} />;

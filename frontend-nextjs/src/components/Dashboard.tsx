@@ -28,7 +28,7 @@ const fleetData = [
   { name: 'UNIT_B11', uptime: 99, efficiency: 95 },
 ];
 
-export default function Dashboard() {
+export default function Dashboard({ onLogout }: { onLogout?: () => void }) {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState("dashboard");
   const [time, setTime] = useState("");
@@ -63,7 +63,10 @@ export default function Dashboard() {
         
         <div className="p-6 border-t border-t-primary/20 bg-black/20 flex flex-col gap-4">
           <button 
-            onClick={() => router.push('/')}
+            onClick={() => {
+              if (onLogout) onLogout();
+              else router.push('/');
+            }}
             className="flex items-center justify-center gap-2 w-full py-2 rounded bg-alert/10 text-alert border border-alert/30 hover:bg-alert/20 transition-colors text-sm font-bold uppercase tracking-wider"
           >
             <LogOut size={16} /> SYSTEM LOGOUT
