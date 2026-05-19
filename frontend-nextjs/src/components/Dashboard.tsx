@@ -1,10 +1,11 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { 
   Activity, Battery, Radio, Settings, ShieldAlert, Thermometer, Wifi,
   Bot, Zap, LayoutDashboard, Box as BoxIcon, Map as MapIcon, Video, AlertTriangle,
-  ArrowUp, ArrowDown, ArrowLeft, ArrowRight, Play, Square, Crosshair
+  ArrowUp, ArrowDown, ArrowLeft, ArrowRight, Play, Square, Crosshair, LogOut
 } from "lucide-react";
 import { LineChart, Line, BarChart, Bar, ResponsiveContainer, Tooltip, XAxis, YAxis, CartesianGrid } from "recharts";
 import { Canvas } from '@react-three/fiber';
@@ -28,6 +29,7 @@ const fleetData = [
 ];
 
 export default function Dashboard() {
+  const router = useRouter();
   const [activeTab, setActiveTab] = useState("dashboard");
   const [time, setTime] = useState("");
 
@@ -59,8 +61,14 @@ export default function Dashboard() {
           </nav>
         </div>
         
-        <div className="p-6 border-t border-t-primary/20 bg-black/20">
-          <div className="flex items-center justify-between mb-2">
+        <div className="p-6 border-t border-t-primary/20 bg-black/20 flex flex-col gap-4">
+          <button 
+            onClick={() => router.push('/')}
+            className="flex items-center justify-center gap-2 w-full py-2 rounded bg-alert/10 text-alert border border-alert/30 hover:bg-alert/20 transition-colors text-sm font-bold uppercase tracking-wider"
+          >
+            <LogOut size={16} /> SYSTEM LOGOUT
+          </button>
+          <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 rounded-full bg-success animate-pulse" />
               <span className="text-xs font-mono text-gray-400">SYS.ON</span>
